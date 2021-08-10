@@ -28,7 +28,7 @@ class OfferController extends Controller
                 'alerted_sound' => 'yes'
             ]);
         }
-        //$this->pelando();
+        $this->pelando();
 
         return response()->json([
             'play_sound' => $play_sound ?? false,
