@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\DomCrawler\Crawler;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class OfferController extends Controller
 {
@@ -174,6 +176,25 @@ class OfferController extends Controller
         }
         return true;
 
+    }
+
+    public function update_photos()
+    {
+          $photos_to_update = Offer::where('link_updated','no')->get();
+
+            foreach($photos_to_update as $photo){
+                $url = $photo->image_url;
+                $contents = file_get_contents($url);
+                $name = substr($url, strrpos($url, '/') + 1);
+                $return  = Storage::disk('public')->put($name, $contents);
+                $link_updated = 'https://api.achapromo.com.br/storage/'.$name;
+                $upd  = Offer::where('id',$photo->id)->update([
+                    'image_url' => $link_updated
+                ]);
+            }
+
+
+            return response()->json($photos_to_update);
     }
 
 }
