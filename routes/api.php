@@ -23,5 +23,5 @@ Route::GET('/offers', [\App\Http\Controllers\OfferController::class,'index']);
 Route::GET('/update_photos', [\App\Http\Controllers\OfferController::class,'update_photos']);
 Route::GET('/offers/publish', [\App\Http\Controllers\OfferController::class,'publish']);
 Route::prefix('checking')->group(function () {
-    Route::POST('pelando', [\App\Http\Controllers\OfferController::class,'pelando']);
+    Route::GET('crawler', [\App\Http\Controllers\OfferController::class,'check']);
 });

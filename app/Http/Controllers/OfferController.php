@@ -30,8 +30,7 @@ class OfferController extends Controller
                 'alerted_sound' => 'yes'
             ]);
         }
-        $this->pelando();
-
+        
         return response()->json([
             'play_sound' => $play_sound ?? false,
             'offers' => $offers,
@@ -195,6 +194,12 @@ class OfferController extends Controller
 
 
             return response()->json($photos_to_update);
+    }
+
+    public function check(){
+        //List of executes
+        $this->pelando();
+
     }
 
 }
