@@ -44,7 +44,7 @@ class OfferController extends Controller
         foreach ($offers as $item){
             $offer = Offer::where('id',$item->id)->first();
             try{
-                $response = Http::post("https://discord.com/api/webhooks/847774836423917589/NwG8COyJnMvP9kR3-I4JCmiYCP0fM1j2IajHy6XFvLdW2cm4XSs0DSF6h8W4jlRDJJ8b",[
+                $response = Http::post(env("WEB_HOOK_DISCORD_API"),[
                     "embeds" => [
                         [
                             "title" => $offer->product,
